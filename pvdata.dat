@@ -1,0 +1,15 @@
+#Expects format <element> <V0> <B0> <B1> <structure (optional)>
+#
+W 15.862 295.2 4.32 bcc
+#ref: Dewaele04PRB
+#
+Pt 15.095 273.6 5.23 fcc
+#ref: Dewaele04PRB
+#
+Ir 14.145 365.0 4.0 fcc
+#
+#
+Ta 18.035 197.0 3.39 bcc
+#ref: Dewaele04PRB
+#
+Re 14.713 372.0 4.05 hcp
