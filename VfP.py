@@ -1,7 +1,7 @@
 #volume from pressure and elemental data
 #also h,k,l if cubic systems
 
-#takes <element> <pressure> and outputs expected unit cell volume
+#takes <element> <pressure> and outputs expected volume per atom
 
 ########
 #Stuff which might want changed
@@ -41,9 +41,9 @@ elementData = pvTools.pvFilereader(file, sys.argv[0])
 #catch missing data
 if elementData is None:
 	print "Element not in " + datafile + "\n"
-	raw_input("Return to quit") 
+	raw_input("Return to quit")
 	exit()
-	
+
 V0,B0,B1,struct = elementData
 structure = struct.lower() #avoid fucking about with capitals
 
@@ -60,24 +60,28 @@ outString = "Volume at " + str(P) + " is " + str(round(V,3)) + "   (units as in 
 # If it's cubic there's more!
 
 if structure in ['bcc','fcc']:
-	
-	#lattice parameter
-	a = V**(1./3.)
-	outString += "\nLattice constant a = " + str(round(a,3)) + "\n\nhkl\td\n\n"
-	
+
 	#h k ls - different for fcc and bcc
 	if structure == 'bcc':
 		#h+k+l = 2n
 		hkllist = [[1,1,0],[2,0,0],[2,1,1],[2,2,0],[3,1,0],[2,2,2],[4,0,0]]
+		#2 atoms per cell, calculate a
+		a = (2*V)**(1./3.)
+
 	else:
 		#fcc and h,k,l all odd or all even
 		hkllist = [[1,1,1],[2,0,0],[2,2,0],[3,1,1],[2,2,2],[4,0,0]]
-	
+		#4 atoms per unit cell, calculate a
+		a = (4*V)**(1./3.)
+
+	#lattice parameter
+	outString += "\nLattice constant a = " + str(round(a,3)) + "\n\nhkl\td\n\n"
+
+
 	for hkl in hkllist:
 		#find d
 		dhkl = dcalc(a,hkl)
-		outString += ''.join(str(hkl)) + "\t" + str(dhkl) + "\n"
+		outString += ''.join(str(hkl)) + "\t" + str(round(dhkl,3)) + "\n"
 
-#output		
+#output
 print outString
-		
