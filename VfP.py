@@ -1,3 +1,5 @@
+#Sept 2017 - updated to Python3
+
 #volume from pressure and elemental data
 #also h,k,l if cubic systems
 
@@ -30,8 +32,8 @@ sys.argv.pop(0) #pop script name
 
 #check if there are the expected 2 arguments
 if len(sys.argv) is not 2:
-	print "Requires two arguments: <element> <pressure>. "
-	raw_input("Quitting.")
+	print ("Requires two arguments: <element> <pressure>. ")
+	input("Quitting.")
 	exit()
 
 #########
@@ -40,8 +42,8 @@ file = open(datafile,'r')
 elementData = pvTools.pvFilereader(file, sys.argv[0])
 #catch missing data
 if elementData is None:
-	print "Element not in " + datafile + "\n"
-	raw_input("Return to quit")
+	print ("Element not in " + datafile + "\n")
+	input("Return to quit")
 	exit()
 
 V0,B0,B1,struct = elementData
@@ -84,4 +86,4 @@ if structure in ['bcc','fcc']:
 		outString += ''.join(str(hkl)) + "\t" + str(round(dhkl,3)) + "\n"
 
 #output
-print outString
+print(outString)

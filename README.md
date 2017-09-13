@@ -1,4 +1,4 @@
-# PressureCalc
+PressureCalc
 Uses Vinet equation of state for pressure calculations for DAC work
 
 PfV.py calculates the pressure given a volume, inputs are either "element" "volume" or "element" "h" "k" "l" "d" for fcc or bcc crystal systems.

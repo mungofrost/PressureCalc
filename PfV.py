@@ -27,8 +27,8 @@ def vCalc (h,k,l,d,struct):
 	#####
 	#Supports only cubic
 	if struct not in ['fcc','bcc']:
-		print "h k l volume only sipported for cubic crystal systems"
-		raw_input("Quitting")
+		print ("h k l volume only sipported for cubic crystal systems")
+		input("Quitting")
 		exit()
 	
 	vol = ((h*h+k*k+l*l)**(1./2.)*d)**3.
@@ -51,8 +51,8 @@ arguments.pop(0) #argv[0] is name of script
 #####
 #Check there are 2 or 5 arguments
 if len(arguments) not in [2,5]:
-	print "The program requires either two (<element> <volume) or 5 (<element> <h> <k> <l> <d>) inputs."
-	raw_input("Quitting.")
+	print ("The program requires either two (<element> <volume) or 5 (<element> <h> <k> <l> <d>) inputs.")
+	input("Quitting.")
 	exit()
 
 #########
@@ -63,8 +63,8 @@ elementData = pvTools.pvFilereader(file, sys.argv[0])
 
 #catch missing data
 if elementData is None:
-	print "Element not in " + datafile + "\n"
-	raw_input("Return to quit") 
+	print ("Element not in " + datafile + "\n")
+	input("Return to quit") 
 	exit()
 	
 V0,B0,B1,struct = elementData
@@ -87,8 +87,8 @@ else:
 	#check structure is supported (fcc,bcc currently)
 	acceptedStructures = ['fcc','bcc']
 	if structure not in acceptedStructures:
-		print "Structure not supported for h k l d volume calculation, please use PfV.py <volume> <element> mode"
-		raw_input("Quitting.")
+		print ("Structure not supported for h k l d volume calculation, please use PfV.py <volume> <element> mode")
+		input("Quitting.")
 	
 	else:
 		h,k,l,d = sys.argv[1:5]
@@ -103,4 +103,4 @@ else:
 
 pressure = pvTools.vinet(V,V0,B0,B1)
 
-print "Pressure is " + str(round(pressure,3)) + "   (units as in " + datafile + ")"
+print ("Pressure is " + str(round(pressure,3)) + "   (units as in " + datafile + ")")
